@@ -3,298 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposta Estratégica - JM Analytics</title>
+    <title>Convite de Parceria Estratégica - JM Analytics</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Chosen Palette: "Calm Confidence" - Soft off-white (#F8F7F4), deep reassuring blue (#1E3A8A), and a warm, encouraging orange (#F97316) for accents and progress. -->
-    <!-- Application Structure Plan: An interactive proposal application. The structure guides the user from a high-level market context to a specific, value-driven pricing decision. It starts by establishing expertise (Market Scan), clarifies the unique value proposition, and culminates in an interactive pricing selector. This selector dynamically updates a summary and a comparative chart, making the financial benefits of the pilot program tangible and persuasive. The goal is to transform a static pricing document into a powerful sales and decision-making tool. -->
-    <!-- Visualization & Content Choices: Report Info: Pricing Models & Options -> Goal: Inform, Compare, Persuade -> Viz/Presentation Method: Styled HTML cards for market context; A two-column layout for value proposition; Interactive cards for pricing options; A dynamic summary panel; and a Chart.js bar chart for cost comparison. -> Interaction: Users can select a pricing plan, which instantly updates the summary text and redraws the bar chart to reflect the chosen plan's value against a market benchmark. -> Justification: This multi-faceted approach makes complex pricing information digestible and visually compelling. The chart, in particular, provides a powerful "at-a-glance" justification for the pilot's value. -> Library/Method: Vanilla JS for state management and DOM updates, Chart.js for data visualization. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" com crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    <!--
+      PROJETO "PARCERIA" - B2G COLLABORATION
+      ========================================
+      - TOM: Respeitoso, colaborativo e grato.
+      - LINGUAGEM: Focada em oportunidade, parceria e resultados mútuos.
+      - ESTRUTURA: Apresentação do desafio, a solução como oportunidade e uma oferta especial de Custo Zero.
+      - OBJETIVO: Construir confiança e iniciar uma conversa positiva.
+    -->
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #F8F7F4;
+            background-color: #f1f5f9; /* slate-100 */
+            color: #0f172a; /* slate-900 */
         }
-        .transition-all {
-            transition: all 0.3s ease-in-out;
+        .header-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
         }
-        .plan-card {
-            border: 2px solid #E5E7EB;
-            cursor: pointer;
+        .card {
+            background-color: #ffffff;
+            border-left: 4px solid #1e3a8a; /* blue-800 */
         }
-        .plan-card.selected {
-            border-color: #F97316;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        .highlight {
+            color: #1e3a8a; /* blue-800 */
         }
-        .chart-container {
-            position: relative;
-            height: 300px;
-            max-height: 40vh;
-            width: 100%;
-            max-width: 600px;
-            margin: auto;
+        .cta-button {
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+        .offer-card {
+            background-color: #1e3a8a;
+            color: white;
+        }
+        .zero-cost {
+            color: #f97316; /* orange-500 */
+            text-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
         }
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="text-slate-900">
+<body class="antialiased">
 
-    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
-        
-        <header class="text-center mb-12">
-            <h1 class="text-3xl md:text-4xl font-bold text-blue-900">Proposta de Parceria Estratégica</h1>
-            <p class="text-slate-600 mt-2 text-lg">JM Analytics & UPA 24h Padre Roberto Cordeiro Martins</p>
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+
+        <!-- HEADER -->
+        <header class="header-gradient text-white rounded-xl p-8 md:p-10 text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-extrabold">Um Convite para uma Parceria de Sucesso</h1>
+            <p class="mt-2 text-lg text-blue-200">Prezado Gestor, agradecemos a oportunidade de apresentar nossa visão para o futuro da UPA.</p>
         </header>
 
-        <main class="space-y-16">
+        <main class="space-y-12">
 
-            <!-- Section 1: Market Context -->
-            <section>
-                <h2 class="text-2xl font-bold text-center mb-2 text-blue-900">Entendendo o Cenário Atual</h2>
-                <p class="text-center text-slate-600 mb-8 max-w-3xl mx-auto">Para construir o futuro, primeiro analisamos o presente. O mercado de software para saúde no Brasil possui modelos de precificação claros, mas que nem sempre se adaptam à realidade de operações de grande porte como a sua.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-800">
-                        <h3 class="font-bold text-lg mb-2">Preço por Usuário</h3>
-                        <p class="text-sm text-slate-600">Comum em clínicas, mas se torna inviável e caro para grandes equipes, punindo a escala.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-800">
-                        <h3 class="font-bold text-lg mb-2">Preço por Pacotes</h3>
-                        <p class="text-sm text-slate-600">Oferece planos com diferentes funcionalidades, mas pode limitar o acesso a recursos essenciais.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-800">
-                        <h3 class="font-bold text-lg mb-2">Taxa de Implementação</h3>
-                        <p class="text-sm text-slate-600">Custo inicial para configuração e treinamento. Garante o comprometimento e o sucesso do projeto.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-orange-500">
-                        <h3 class="font-bold text-lg mb-2">Preço Fixo (Flat Fee)</h3>
-                        <p class="text-sm text-slate-600">Ideal para grandes operações. Um valor fixo para acesso ilimitado, promovendo o uso em toda a unidade.</p>
-                    </div>
-                </div>
+            <!-- 1. A OPORTUNIDADE -->
+            <section class="card p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Nossa Análise e a Oportunidade Identificada</h2>
+                <p class="mt-4 text-lg text-slate-700">Após nossa conversa, ficou claro o excelente trabalho realizado na UPA. Também identificamos uma oportunidade única de elevar ainda mais a eficiência e a segurança da sua operação. A gestão de milhares de atendimentos mensais pode ser otimizada, eliminando riscos de compliance e liberando recursos valiosos que hoje são consumidos por processos manuais.</p>
             </section>
 
-            <!-- Section 2: The Core Problem & Our Solution -->
-            <section>
-                <h2 class="text-2xl font-bold text-center mb-8 text-blue-900">Nossa Vantagem Competitiva: Mais que um Software, uma Solução</h2>
-                <div class="bg-white p-8 rounded-2xl shadow-lg grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="border-r-0 md:border-r md:pr-8 border-slate-200">
-                        <h3 class="font-bold text-xl mb-3 text-slate-500">O Padrão do Mercado</h3>
-                        <ul class="space-y-2 text-slate-600">
-                            <li class="flex items-start gap-3"><span>-</span> Foco em agendamento de plantões.</li>
-                            <li class="flex items-start gap-3"><span>-</span> Funcionalidades de gestão genéricas.</li>
-                            <li class="flex items-start gap-3"><span>-</span> Risco na transferência de informações críticas do paciente.</li>
-                            <li class="flex items-start gap-3"><span>-</span> Preços que penalizam o crescimento da equipe.</li>
-                        </ul>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h3 class="font-bold text-xl mb-3 text-blue-900">A Proposta JM Analytics</h3>
-                        <ul class="space-y-2 text-blue-800">
-                            <li class="flex items-start gap-3"><span class="font-bold text-orange-500">✓</span> Foco na **Transferência Segura do Cuidado**.</li>
-                            <li class="flex items-start gap-3"><span class="font-bold text-orange-500">✓</span> Plataforma 100% rastreável e auditável.</li>
-                            <li class="flex items-start gap-3"><span class="font-bold text-orange-500">✓</span> Redução de falhas e aumento da segurança do paciente.</li>
-                            <li class="flex items-start gap-3"><span class="font-bold text-orange-500">✓</span> Modelo de preço que incentiva o uso por toda a unidade.</li>
-                        </ul>
-                    </div>
-                </div>
+            <!-- 2. NOSSO COMPROMISSO -->
+            <section class="card p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Nosso Compromisso: Resultados Visíveis</h2>
+                <p class="mt-4 text-lg text-slate-700">Prometemos entregar uma solução que trará controle, segurança e eficiência para sua gestão. Nosso objetivo é claro:</p>
+                <ul class="mt-4 space-y-2 text-slate-600 text-lg">
+                    <li><span class="highlight font-bold">✓</span> <strong>Tranquilidade Jurídica:</strong> Um sistema 100% auditável que blinda sua gestão e garante total conformidade com a LGPD e órgãos de controle.</li>
+                    <li><span class="highlight font-bold">✓</span> <strong>Eficiência Operacional:</strong> Uma equipe mais focada no paciente, com processos ágeis e comunicação centralizada.</li>
+                    <li><span class="highlight font-bold">✓</span> <strong>Gestão Estratégica:</strong> Dados claros para decisões inteligentes, otimizando o uso do orçamento público.</li>
+                </ul>
             </section>
-
-            <!-- Section 3: Interactive Proposal -->
-            <section>
-                <h2 class="text-2xl font-bold text-center mb-2 text-blue-900">Nossa Proposta de Parceria Piloto</h2>
-                <p class="text-center text-slate-600 mb-8 max-w-3xl mx-auto">Esta não é uma proposta padrão. É um convite para sermos parceiros na construção de um case de sucesso. Selecione uma das opções para ver os detalhes do investimento.</p>
+            
+            <!-- 3. A OFERTA DE PARCERIA -->
+            <section class="offer-card rounded-2xl shadow-2xl p-8 text-center">
+                <h2 class="text-2xl md:text-3xl font-extrabold">Uma Oferta Especial para Começar com o Pé Direito</h2>
+                <p class="mt-2 text-blue-200 text-lg">Acreditamos tanto no potencial desta parceria que estamos removendo a principal barreira para o início.</p>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                    <!-- Option 1 Card -->
-                    <div id="plan-1" class="plan-card bg-white p-6 rounded-2xl transition-all">
-                        <div class="flex justify-between items-start">
-                             <h3 class="text-xl font-bold text-blue-900">Opção 1: Parceria Máxima</h3>
-                             <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full">Recomendado</span>
-                        </div>
-                        <p class="text-sm text-slate-600 mt-2 mb-4">Um modelo simples e completo para uma parceria estratégica, maximizando o valor desde o primeiro dia.</p>
-                        <div class="text-3xl font-bold mb-4">R$ 950 <span class="text-base font-medium text-slate-500">/ mês</span></div>
-                        <ul class="text-sm space-y-2">
-                            <li class="flex gap-2"><span class="text-green-500 font-bold">✓</span> Acesso ilimitado para 400+ profissionais</li>
-                            <li class="flex gap-2"><span class="text-green-500 font-bold">✓</span> Suporte intensivo nos primeiros 30 dias</li>
-                            <li class="flex gap-2"><span class="text-green-500 font-bold">✓</span> Treinamento completo para equipes-chave</li>
-                        </ul>
-                        <p class="text-xs text-slate-500 mt-4">+ Taxa de Implementação Estratégica: R$ 4.800</p>
-                    </div>
-
-                    <!-- Option 2 Card -->
-                    <div id="plan-2" class="plan-card bg-white p-6 rounded-2xl transition-all">
-                        <h3 class="text-xl font-bold text-blue-900">Opção 2: Valor Progressivo</h3>
-                        <p class="text-sm text-slate-600 mt-2 mb-4">Comece com o módulo essencial e adicione a camada de inteligência gerencial conforme a necessidade.</p>
-                        <div class="text-3xl font-bold mb-4">R$ 700 <span class="text-base font-medium text-slate-500">/ mês</span></div>
-                         <ul class="text-sm space-y-2">
-                            <li class="flex gap-2"><span class="text-green-500 font-bold">✓</span> Módulo Essencial (Passagem de Plantão)</li>
-                            <li class="flex gap-2"><span class="text-green-500 font-bold">✓</span> Configuração padrão e treinamento de admins</li>
-                            <li class="flex gap-2"><span class="text-slate-400 font-bold">+</span> Módulo Opcional (Dashboard Avançado): +R$ 450/mês</li>
-                        </ul>
-                        <p class="text-xs text-slate-500 mt-4">+ Taxa de Implementação Essencial: R$ 3.500</p>
-                    </div>
+                <div class="my-8 bg-white/10 p-6 rounded-lg">
+                    <p class="text-blue-200 font-semibold">CUSTO DE IMPLEMENTAÇÃO</p>
+                    <p class="text-7xl font-extrabold zero-cost my-2">ZERO</p>
+                    <p class="text-blue-200">Nós cobriremos 100% dos custos de setup, treinamento e integração. Um investimento nosso para provar o valor da nossa solução e o nosso comprometimento com o seu sucesso.</p>
                 </div>
+                
+                <p class="text-lg">O investimento se concentra apenas na mensalidade da plataforma, com retorno visível nos primeiros meses de uso.</p>
+            </section>
 
-                <!-- Dynamic Summary & Chart -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div id="summary-panel">
-                        <h3 class="text-xl font-bold mb-4 text-blue-900">Resumo do Investimento</h3>
-                        <div class="space-y-3 text-slate-700">
-                            <div class="flex justify-between"><span>Plano Selecionado:</span> <strong id="summary-plan-name" class="text-blue-800"></strong></div>
-                            <div class="flex justify-between"><span>Taxa de Implementação:</span> <strong id="summary-setup-fee"></strong></div>
-                            <div class="flex justify-between"><span>Mensalidade Piloto:</span> <strong id="summary-monthly-fee"></strong></div>
-                            <hr class="my-2">
-                            <div class="flex justify-between text-lg"><strong>Investimento Total (1º Ano):</strong> <strong id="summary-total-year" class="text-orange-600"></strong></div>
-                            <hr class="my-2">
-                            <div class="flex justify-between text-sm bg-blue-50 p-3 rounded-md"><span>Custo Efetivo por Usuário/Mês:</span> <strong id="summary-per-user" class="text-blue-800"></strong></div>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="cost-comparison-chart"></canvas>
-                    </div>
+
+            <!-- 4. PRÓXIMO PASSO -->
+            <section class="text-center">
+                <div class="mt-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Vamos Construir este Sucesso Juntos?</h2>
+                    <p class="mt-4 text-lg text-slate-700 max-w-3xl mx-auto">Será um prazer dar o próximo passo. Clique abaixo para agendarmos uma breve conversa e alinharmos os detalhes para o início desta parceria transformadora.</p>
+                    <a href="https://wa.me/5535999706921?text=Agrade%C3%A7o%20pela%20proposta%20e%20pela%20condi%C3%A7%C3%A3o%20especial.%20Vamos%20alinhar%20os%20pr%C3%B3ximos%20passos%20para%20iniciar%20nossa%20parceria." target="_blank" class="cta-button mt-8 bg-blue-700 text-white font-bold py-4 px-10 rounded-lg hover:bg-blue-800 text-xl inline-block">
+                        AGENDAR CONVERSA
+                    </a>
                 </div>
             </section>
 
         </main>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const plans = {
-                'plan-1': {
-                    name: 'Parceria Máxima',
-                    setupFee: 4800,
-                    monthlyFee: 950,
-                    users: 416,
-                    marketMonthly: 8000 
-                },
-                'plan-2': {
-                    name: 'Valor Progressivo',
-                    setupFee: 3500,
-                    monthlyFee: 700,
-                    users: 416,
-                    marketMonthly: 6000 
-                }
-            };
-
-            let selectedPlanId = 'plan-1';
-            let chartInstance = null;
-
-            const plan1Card = document.getElementById('plan-1');
-            const plan2Card = document.getElementById('plan-2');
-
-            const summaryPlanName = document.getElementById('summary-plan-name');
-            const summarySetupFee = document.getElementById('summary-setup-fee');
-            const summaryMonthlyFee = document.getElementById('summary-monthly-fee');
-            const summaryTotalYear = document.getElementById('summary-total-year');
-            const summaryPerUser = document.getElementById('summary-per-user');
-            const chartCanvas = document.getElementById('cost-comparison-chart').getContext('2d');
-
-            function formatCurrency(value) {
-                return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            }
-
-            function updateSummary() {
-                const plan = plans[selectedPlanId];
-                const totalYearlyCost = plan.setupFee + (plan.monthlyFee * 12);
-                const costPerUser = plan.monthlyFee / plan.users;
-
-                summaryPlanName.textContent = plan.name;
-                summarySetupFee.textContent = formatCurrency(plan.setupFee);
-                summaryMonthlyFee.textContent = formatCurrency(plan.monthlyFee);
-                summaryTotalYear.textContent = formatCurrency(totalYearlyCost);
-                summaryPerUser.textContent = `${formatCurrency(costPerUser)} (vs. R$50-R$150 do mercado)`;
-
-                document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('selected'));
-                document.getElementById(selectedPlanId).classList.add('selected');
-                
-                renderChart();
-            }
-
-            function renderChart() {
-                const plan = plans[selectedPlanId];
-                
-                if (chartInstance) {
-                    chartInstance.destroy();
-                }
-
-                chartInstance = new Chart(chartCanvas, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Custo de Mercado Estimado', 'Sua Parceria Piloto'],
-                        datasets: [{
-                            label: 'Custo Mensal',
-                            data: [plan.marketMonthly, plan.monthlyFee],
-                            backgroundColor: [
-                                'rgba(55, 65, 81, 0.3)',
-                                'rgba(249, 115, 22, 0.7)'
-                            ],
-                            borderColor: [
-                                'rgba(55, 65, 81, 1)',
-                                'rgba(249, 115, 22, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        indexAxis: 'y',
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            title: {
-                                display: true,
-                                text: 'Comparativo de Investimento Mensal',
-                                font: {
-                                    size: 16,
-                                    family: 'Poppins'
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.dataset.label || '';
-                                        if (label) {
-                                            label += ': ';
-                                        }
-                                        if (context.parsed.x !== null) {
-                                            label += formatCurrency(context.parsed.x);
-                                        }
-                                        return label;
-                                    }
-                                }
-                            }
-                        },
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                                ticks: {
-                                    callback: function(value, index, values) {
-                                        return formatCurrency(value);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            plan1Card.addEventListener('click', () => {
-                selectedPlanId = 'plan-1';
-                updateSummary();
-            });
-
-            plan2Card.addEventListener('click', () => {
-                selectedPlanId = 'plan-2';
-                updateSummary();
-            });
-
-            // Initial load
-            updateSummary();
-        });
-    </script>
 </body>
 </html>
