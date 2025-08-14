@@ -10,12 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!--
-      PROJETO "PARCERIA 3.1" - PROPOSTA COM CALCULADORA E CONTEXTO MELHORADO
+      PROJETO "PARCERIA 4.4" - BOTÃO DE RECUSA SUAVE COM AÇÃO
       =======================================================
-      - ESTRUTURA: Adicionada uma terceira página com a calculadora de ROI.
-      - NAVEGAÇÃO: JavaScript atualizado para gerenciar as três páginas.
-      - INTERATIVIDADE: Permite ao cliente alternar entre a proposta e a simulação de custos.
-      - CONTEXTO: Melhorada a explicação da calculadora para focar no custo futuro da inação.
+      - ESTRUTURA: Mantida a estrutura de 3 páginas.
+      - OFERTA: O botão "Não quero agora" foi transformado em um link para o WhatsApp com uma mensagem pré-definida.
     -->
     <style>
         body {
@@ -56,9 +54,9 @@
             background-color: #fefce8; /* yellow-50 */
             border: 2px dashed #f97316; /* orange-500 */
         }
-        .pix-offer-card {
+        .benefits-card {
             background-color: #f0fdf4; /* green-50 */
-            border: 2px dashed #22c55e; /* green-500 */
+            border-left: 4px solid #22c55e; /* green-500 */
         }
         /* Estilos da Calculadora */
         .calculator-body {
@@ -119,7 +117,7 @@
                     <div class="my-8 bg-white/10 p-6 rounded-lg">
                         <p class="text-blue-200 font-semibold">CUSTO DE IMPLEMENTAÇÃO</p>
                         <p class="text-7xl font-extrabold zero-cost my-2">ZERO</p>
-                        <p class="text-blue-200">Nós cobriremos 100% dos custos de setup, treinamento e integração. Um investimento nosso para provar o valor da nossa solução e o nosso comprometimento com o seu sucesso.</p>
+                        <p class="text-blue-200">Nós cobriremos 100% dos custos de setup, treinamento e integração. Do zero ao funcionamento em pouquíssimo tempo.</p>
                     </div>
                 </section>
 
@@ -134,8 +132,8 @@
                              <button onclick="showPage('page3')" class="cta-button bg-green-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-600 text-lg">
                                 Calcular Custo Oculto
                             </button>
-                            <a href="https://wa.me/5535999706921?text=Agrade%C3%A7o%20pela%20proposta%20e%20pela%20condi%C3%A7%C3%A3o%20especial.%20Vamos%20alinhar%20os%20pr%C3%B3ximos%20passos%20para%20iniciar%20nossa%20parceria." target="_blank" class="cta-button bg-blue-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 text-lg inline-block">
-                                Agendar Conversa
+                            <a href="https://wa.me/5535999706921?text=Posso%20mudar%20de%20opini%C3%A3o%20futuramente%2C%20obrigado%20pela%20apresenta%C3%A7%C3%A3o." target="_blank" class="cta-button bg-slate-200 text-slate-700 font-bold py-3 px-8 rounded-lg hover:bg-slate-300 text-lg inline-block">
+                                Não quero agora
                             </a>
                         </div>
                     </div>
@@ -146,58 +144,59 @@
 
     <!-- PÁGINA 2: NOSSOS PREÇOS -->
     <div id="page2" style="display: none;">
-        <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+        <div class="container mx-auto p-4 md:p-8 max-w-5xl">
             <div class="text-left mb-6">
                 <button onclick="showPage('page1')" class="text-blue-700 hover:underline font-semibold">&larr; Voltar ao Convite</button>
             </div>
 
             <header class="text-center mb-12">
-                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-800">Nossos Preços: Uma Proposta de Parceria Transparente</h1>
-                <p class="mt-2 text-lg text-slate-600">Acreditamos em um modelo onde nosso sucesso está atrelado ao seu. Por isso, nossa proposta é simples e de altíssimo valor agregado.</p>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-800">Nossa Proposta de Parceria</h1>
+                <p class="mt-2 text-lg text-slate-600">Um modelo flexível, transparente e focado no seu sucesso a longo prazo.</p>
             </header>
 
             <main class="space-y-12">
-                <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="price-card p-8 rounded-lg shadow-xl">
-                        <div class="flex justify-between items-center">
-                            <h2 class="text-2xl font-bold text-slate-800">Parceria Estratégica Inicial</h2>
-                            <span class="bg-red-100 text-red-700 font-bold px-3 py-1 rounded-full">50% OFF</span>
-                        </div>
+                <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="price-card p-8 rounded-lg shadow-xl flex flex-col">
+                        <h2 class="text-2xl font-bold text-slate-800">Plano de Parceria Essencial</h2>
                         <div class="my-4">
-                            <p class="text-3xl text-red-500 font-bold line-through">R$ 700/mês</p>
-                            <p class="text-6xl font-extrabold text-blue-800">R$ 350<span class="text-xl font-medium text-slate-500">/mês</span></p>
+                            <p class="text-6xl font-extrabold text-blue-800">R$ 499<span class="text-xl font-medium text-slate-500">/mês</span></p>
+                            <p class="text-lg text-slate-500">Contrato de 8 meses</p>
                         </div>
-                        <ul class="space-y-2 text-slate-600">
-                            <li><span class="font-bold text-blue-700">✓</span> Contrato de <strong>6 meses</strong> focado em resultados.</li>
-                            <li><span class="font-bold text-blue-700">✓</span> Após este período, <strong>36 meses de uso sem custos</strong> adicionais de licença.</li>
-                            <li><span class="font-bold text-blue-700">✓</span> Implementação, treinamento e integração <strong>100% gratuitos</strong>.</li>
+                        <ul class="space-y-3 text-slate-600 flex-grow">
+                            <li><span class="font-bold text-blue-700">✓</span> <strong>Implementação Custo Zero:</strong> Do planejamento à ativação em tempo recorde, sem custos.</li>
+                            <li><span class="font-bold text-blue-700">✓</span> <strong>Treinamento de Equipe:</strong> Capacitação completa para garantir a melhor utilização da ferramenta.</li>
+                            <li><span class="font-bold text-blue-700">✓</span> <strong>Manual de Boas Práticas:</strong> Documentação completa para consulta e novos colaboradores (Gratuito).</li>
+                             <li><span class="font-bold text-blue-700">✓</span> <strong>Reunião de Apresentação:</strong> Alinhamento geral com toda a equipe para garantir o sucesso do projeto (Gratuito).</li>
                         </ul>
                     </div>
-                    <div class="price-card p-8 rounded-lg shadow-xl">
-                        <h2 class="text-2xl font-bold text-slate-800">Suporte e Evolução Contínua</h2>
-                        <p class="text-6xl font-extrabold text-blue-800 my-4">R$ 150<span class="text-xl font-medium text-slate-500">/mês</span></p>
-                        <ul class="space-y-2 text-slate-600">
-                            <li><span class="font-bold text-blue-700">✓</span> Taxa de suporte e manutenção pelos próximos <strong>25 meses</strong>.</li>
-                            <li><span class="font-bold text-blue-700">✓</span> Garante atualizações de segurança e melhorias contínuas.</li>
-                             <li><span class="font-bold text-blue-700">✓</span> Acesso prioritário à nossa equipe de especialistas.</li>
+                    <div class="price-card p-8 rounded-lg shadow-xl flex flex-col">
+                        <h2 class="text-2xl font-bold text-slate-800">Suporte e Melhoria Contínua</h2>
+                        <div class="my-4">
+                            <p class="text-6xl font-extrabold text-blue-800">R$ 99<span class="text-xl font-medium text-slate-500">/mês</span></p>
+                            <p class="text-lg text-green-600 font-bold">ou R$ 79/mês no plano de 8 meses</p>
+                        </div>
+                        <ul class="space-y-3 text-slate-600 flex-grow">
+                            <li><span class="font-bold text-blue-700">✓</span> <strong>Evolução Constante:</strong> Garante atualizações de segurança e novas funcionalidades.</li>
+                            <li><span class="font-bold text-blue-700">✓</span> <strong>Acesso Prioritário:</strong> Suporte direto com nossa equipe de especialistas.</li>
+                            <li><span class="font-bold text-blue-700">✓</span> <strong>Reuniões Estratégicas:</strong> Encontros a cada 25 dias para ouvir melhorias e identificar necessidades ocultas.</li>
                         </ul>
                     </div>
                 </section>
 
-                <section class="pix-offer-card p-8 rounded-lg text-center shadow-lg">
-                    <h2 class="text-2xl md:text-3xl font-extrabold text-green-900">Condição Especial: Pagamento via PIX</h2>
-                    <p class="mt-4 text-lg text-slate-700 max-w-3xl mx-auto">Para acelerar nossa parceria, oferecemos um benefício exclusivo para pagamento à vista do projeto.</p>
-                    <div class="my-6">
-                        <p class="text-slate-700 text-lg">Ao quitar o valor total da Parceria Inicial (6x R$350) via PIX, você recebe a <strong class="text-green-700">isenção completa da taxa de suporte</strong> pelos 25 meses.</p>
-                        <p class="text-5xl font-extrabold text-green-600 mt-4">Economia Adicional de R$ 3.750</p>
-                        <p class="text-slate-600">(R$ 150/mês x 25 meses)</p>
+                <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                     <div class="benefits-card p-8 rounded-lg shadow-lg">
+                        <h2 class="text-2xl font-bold text-slate-800">Serviços Adicionais</h2>
+                        <ul class="mt-4 space-y-3 text-slate-700">
+                           <li>
+                                <p class="font-bold">Treinamento para Administrador</p>
+                                <p>Capacitação aprofundada para o gestor do sistema. <strong class="text-blue-800">R$ 120 (taxa única)</strong>.</p>
+                           </li>
+                        </ul>
                     </div>
-                </section>
-
-                <section class="source-code-card p-8 rounded-lg text-center">
-                    <h2 class="text-2xl md:text-3xl font-extrabold text-orange-900">O Símbolo Máximo da Nossa Parceria</h2>
-                    <p class="mt-4 text-lg text-slate-700 max-w-3xl mx-auto">Para evidenciar que este é um projeto conjunto, assumimos um compromisso inédito: ao final dos 6 meses de parceria estratégica, <strong>cederemos o código fonte completo da solução</strong>.</p>
-                    <p class="mt-4 font-bold text-slate-800">Isso significa que a instituição terá autonomia total para hospedar e rodar o sistema em segundos, caso não deseje renovar o suporte. O ativo se torna seu. O risco é nosso.</p>
+                    <div class="source-code-card p-8 rounded-lg text-center">
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-orange-900">O Ativo Torna-se Seu</h2>
+                        <p class="mt-2 text-lg text-slate-700">Ao final da parceria de 8 meses, <strong>cedemos o código fonte completo da solução</strong>. O risco é nosso, a autonomia é sua.</p>
+                    </div>
                 </section>
 
                 <section class="text-center">
