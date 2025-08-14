@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite de Parceria Estratégica - JM Analytics</title>
+    <title>Proposta Exclusiva UPA: Implementação Custo ZERO e o Código Fonte é SEU</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!--
-      PROJETO "PARCERIA 2.0" - B2G COLLABORATION COM PREÇOS
+      PROJETO "PARCERIA 3.1" - PROPOSTA COM CALCULADORA E CONTEXTO MELHORADO
       =======================================================
-      - ESTRUTURA: Adicionada uma segunda página para detalhar os preços.
-      - NAVEGAÇÃO: JavaScript simples para alternar entre a página principal e a de preços.
-      - OFERTA: Detalha o plano de 6 meses, a isenção por 36 meses, o suporte e a entrega do código fonte.
-      - OBJETIVO: Manter o tom de parceria, mas com uma proposta comercial clara e de altíssimo valor agregado.
+      - ESTRUTURA: Adicionada uma terceira página com a calculadora de ROI.
+      - NAVEGAÇÃO: JavaScript atualizado para gerenciar as três páginas.
+      - INTERATIVIDADE: Permite ao cliente alternar entre a proposta e a simulação de custos.
+      - CONTEXTO: Melhorada a explicação da calculadora para focar no custo futuro da inação.
     -->
     <style>
         body {
@@ -59,6 +60,31 @@
             background-color: #f0fdf4; /* green-50 */
             border: 2px dashed #22c55e; /* green-500 */
         }
+        /* Estilos da Calculadora */
+        .calculator-body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .param-card, .result-card {
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #2563eb;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #2563eb;
+            cursor: pointer;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -100,12 +126,15 @@
                 <section class="text-center py-12 md:py-16">
                     <div>
                         <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Vamos Construir este Sucesso Juntos?</h2>
-                        <p class="mt-4 text-lg text-slate-700 max-w-3xl mx-auto">Será um prazer dar o próximo passo. Veja nossa proposta de preços transparente ou agende uma conversa para alinharmos os detalhes.</p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-                            <button onclick="showPage('page2')" class="cta-button bg-orange-500 text-white font-bold py-4 px-10 rounded-lg hover:bg-orange-600 text-xl">
+                        <p class="mt-4 text-lg text-slate-700 max-w-3xl mx-auto">Será um prazer dar o próximo passo. Explore nossas ferramentas ou agende uma conversa para alinharmos os detalhes.</p>
+                        <div class="flex flex-wrap gap-4 justify-center mt-8">
+                            <button onclick="showPage('page2')" class="cta-button bg-orange-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-orange-600 text-lg">
                                 Ver Nossos Preços
                             </button>
-                            <a href="https://wa.me/5535999706921?text=Agrade%C3%A7o%20pela%20proposta%20e%20pela%20condi%C3%A7%C3%A3o%20especial.%20Vamos%20alinhar%20os%20pr%C3%B3ximos%20passos%20para%20iniciar%20nossa%20parceria." target="_blank" class="cta-button bg-blue-700 text-white font-bold py-4 px-10 rounded-lg hover:bg-blue-800 text-xl inline-block">
+                             <button onclick="showPage('page3')" class="cta-button bg-green-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-600 text-lg">
+                                Calcular Custo Oculto
+                            </button>
+                            <a href="https://wa.me/5535999706921?text=Agrade%C3%A7o%20pela%20proposta%20e%20pela%20condi%C3%A7%C3%A3o%20especial.%20Vamos%20alinhar%20os%20pr%C3%B3ximos%20passos%20para%20iniciar%20nossa%20parceria." target="_blank" class="cta-button bg-blue-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-800 text-lg inline-block">
                                 Agendar Conversa
                             </a>
                         </div>
@@ -183,18 +212,131 @@
             </main>
         </div>
     </div>
+    
+    <!-- PÁGINA 3: CALCULADORA -->
+    <div id="page3" style="display: none;">
+        <div class="calculator-body flex items-center justify-center min-h-screen p-4">
+             <main class="w-full max-w-4xl bg-white p-6 md:p-10 rounded-2xl shadow-2xl border border-slate-200">
+                <div class="text-left mb-6">
+                    <button onclick="showPage('page1')" class="text-blue-700 hover:underline font-semibold">&larr; Voltar à Proposta</button>
+                </div>
+                <section class="text-center mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Calculadora de Custo em 120 Dias</h1>
+                    <p class="mt-3 text-base md:text-lg text-slate-600 max-w-3xl mx-auto">
+                        Esta calculadora prova que um sistema baseado em papel é mais caro do que parece. Use-a para visualizar o custo real da burocracia manual e entenda por que deixar de modernizar os processos operacionais agora custará ainda mais caro para a UPA no futuro.
+                    </p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-xl font-bold text-slate-800 mb-4 text-center">Premissas da Simulação</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div class="param-card p-3">
+                            <span class="block text-sm font-medium text-slate-500">Impressões/Mês</span>
+                            <span class="block text-lg font-bold text-slate-700">250 Folhas</span>
+                        </div>
+                        <div class="param-card p-3">
+                            <span class="block text-sm font-medium text-slate-500">Custo/Impressão</span>
+                            <span class="block text-lg font-bold text-slate-700">R$ 2,50</span>
+                        </div>
+                        <div class="param-card p-3">
+                            <span class="block text-sm font-medium text-slate-500">Custo/Minuto Médico</span>
+                            <span class="block text-lg font-bold text-slate-700">R$ 3,00</span>
+                        </div>
+                        <div class="param-card p-3">
+                            <span class="block text-sm font-medium text-slate-500">Período</span>
+                            <span class="block text-lg font-bold text-slate-700">120 Dias</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="simulator" class="mb-8 bg-slate-50 p-6 rounded-lg">
+                    <label for="minutosSlider" class="block text-center font-medium text-slate-700 text-lg">Quantos minutos o médico gasta por dia com burocracia?</label>
+                    <span id="minutosValue" class="block text-4xl font-bold text-blue-600 mt-2 text-center">15 min</span>
+                    <input id="minutosSlider" type="range" min="1" max="120" value="15" step="1" class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider mt-4">
+                </section>
+
+                <hr class="my-8 border-slate-200">
+
+                <section id="resultados" class="text-center">
+                     <h2 class="text-2xl font-bold text-slate-800 mb-6">Resultado da Simulação</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="result-card p-4">
+                            <h3 class="text-lg font-semibold text-slate-600">Custo de Impressões</h3>
+                            <p id="custoMaterial" class="text-3xl font-extrabold text-slate-800 my-2">R$ 2.500,00</p>
+                        </div>
+                        <div class="result-card p-4">
+                            <h3 class="text-lg font-semibold text-slate-600">Custo de Tempo Médico</h3>
+                            <p id="custoMedico" class="text-3xl font-extrabold text-slate-800 my-2">R$ 5.400,00</p>
+                        </div>
+                        <div class="result-card p-4 bg-blue-600 text-white">
+                            <h3 class="text-lg font-semibold text-blue-200">Gasto Total em 120 Dias</h3>
+                            <p id="custoTotal" class="text-3xl font-extrabold my-2">R$ 7.900,00</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
 
     <script>
+        // Lógica de Navegação
         function showPage(pageId) {
             document.getElementById('page1').style.display = 'none';
             document.getElementById('page2').style.display = 'none';
+            document.getElementById('page3').style.display = 'none';
             document.getElementById(pageId).style.display = 'block';
             window.scrollTo(0, 0);
         }
+
+        // Lógica da Calculadora
+        const minutosSlider = document.getElementById('minutosSlider');
+        const minutosValue = document.getElementById('minutosValue');
+        const custoMaterialEl = document.getElementById('custoMaterial');
+        const custoMedicoEl = document.getElementById('custoMedico');
+        const custoTotalEl = document.getElementById('custoTotal');
+
+        const formatCurrency = (value) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+
+        function updateDashboard() {
+            if (!minutosSlider) return; // Garante que o script só rode se a calculadora estiver na DOM
+            
+            const minutosGastosPorDia = parseFloat(minutosSlider.value);
+            
+            const folhasPorMes = 250;
+            const custoPorImpressao = 2.50;
+            const custoMinutoMedico = 3.00;
+            const periodoDias = 120;
+            const periodoMeses = 4;
+
+            minutosValue.textContent = `${minutosGastosPorDia} min`;
+
+            const custoMaterial = folhasPorMes * periodoMeses * custoPorImpressao;
+            const custoMedico = minutosGastosPorDia * periodoDias * custoMinutoMedico;
+            const custoTotal = custoMaterial + custoMedico;
+
+            custoMaterialEl.textContent = formatCurrency(custoMaterial);
+            custoMedicoEl.textContent = formatCurrency(custoMedico);
+            custoTotalEl.textContent = formatCurrency(custoTotal);
+        }
+
+        if (minutosSlider) {
+            minutosSlider.addEventListener('input', updateDashboard);
+        }
+
+        // Inicializa a calculadora quando a página 3 for exibida
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Verifica se a calculadora está visível no carregamento inicial (pouco provável, mas seguro)
+            if (document.getElementById('page3').style.display !== 'none') {
+                 updateDashboard();
+            }
+        });
+        
+        // Garante que a calculadora inicie com os valores corretos
+        // A função é chamada no onload ou quando o botão é clicado.
+        // Uma chamada inicial segura
+        updateDashboard();
+
     </script>
 
 </body>
 </html>
-```
-
-Para ver esta página em ação, basta clicar no botão **"Preview"** no topo da tela. A página interativa será carregada para sua análi
